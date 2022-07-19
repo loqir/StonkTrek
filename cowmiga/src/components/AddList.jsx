@@ -15,12 +15,11 @@ export default function AddList() {
             .catch(error => {
                 console.log(error.message)
             })
-        alert(name)
     }
     return (
         <div>
             <h4>AddList</h4>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label htmlFor='name'>Movie Name</label>
                 <input
                     id='name'
