@@ -21,7 +21,7 @@ const Create = () => {
 
     fetch('https://orbitalfastapi.herokuapp.com/stocksearch', {
       method: 'POST',
-      // mode: 'no-cors',
+      mode: 'no-cors',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(info)
     }).then((result) => result.json()).then(value => settup(JSON.parse(value)))
