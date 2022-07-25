@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore'
 import { db } from '../lib/init-firebase'
 import { useEffect } from 'react'
 
@@ -17,7 +17,7 @@ export default function List() {
     }, [movies])
 
     function getMovies() {
-        const listRef = collection(db, 'movies')
+        const listRef = collection(db, 'searches')
         getDocs(listRef).then(response => {
             console.log(response.docs)
             const movs = response.docs.map(doc => ({
@@ -31,10 +31,10 @@ export default function List() {
 
     return (
         <div>
-            <h4>List Movies NICE</h4>
-            <button onClick={() => getMovies()}>Refresh movies</button>
+            <button onClick={() => getMovies()}>Refresh</button>
             <ul>
-                {movies.map(movie => <li key={movie.id}>{movie.data.name}</li>)}
+                {console.log(movies)}
+            {movies.map(movie => <li key = {movie.data.count}>{movie.data.name} <bold> count: </bold>{movie.data.count}</li> )}
             </ul>
 
         </div>

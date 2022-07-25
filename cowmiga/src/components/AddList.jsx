@@ -10,7 +10,7 @@ export default function AddList() {
         if (name === '') {
             return
         }
-        const listRef = collection(db, 'movies')
+        const listRef = collection(db, 'searches')
         addDoc(listRef, { name }).then(response => { console.log(response) })
             .catch(error => {
                 console.log(error.message)

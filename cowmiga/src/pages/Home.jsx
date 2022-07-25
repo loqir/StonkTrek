@@ -8,8 +8,7 @@ export const Banner = () => {
 const Home = () => {
   return (
     <div>
-      <h1>Home</h1>
-      <div>Have some content</div>
+      <h1>StonkTrek</h1>
       <Create />
     </div>
   );

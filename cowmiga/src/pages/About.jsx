@@ -4,7 +4,7 @@ import List from '../components/List'
 const About = () => {
   return (
     <div>
-      <h1>About</h1>
+      <h1>SearchedTickers</h1>
       <List />
     </div>
   );

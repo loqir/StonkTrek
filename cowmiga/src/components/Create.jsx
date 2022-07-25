@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import Stock from './Stock';
 import Gauge from './Gauge';
-import { addDoc, collection, onSnapshot, doc, query, where, querySnapshot } from 'firebase/firestore'
+import { addDoc, collection, onSnapshot, doc, query, where, querySnapshot, updateDoc, getDoc, getDocs } from 'firebase/firestore'
 import { db } from '../lib/init-firebase'
 import GreenArrow from "./GreenArrow";
 import RedArrow from "./RedArrow";
@@ -17,10 +17,11 @@ const Create = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const info = { ticker };
+    const info = {ticker};
 
     fetch('https://orbitalfastapi.herokuapp.com/stocksearch', {
       method: 'POST',
+      // mode: 'no-cors',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(info)
     }).then((result) => result.json()).then(value => settup(JSON.parse(value)))
@@ -30,26 +31,26 @@ const Create = () => {
       });
 
 
-    // const colRef = collection(db, 'movies')
-    // const q = query(colRef, where("name", "==", {ticker}))
-
-    // q.get().then(querySnapshot => {
-    //   querySnapshot.size == 0 ?
-    //   //Add new document to collection
-    // addDoc(colRef, {
-    //   name :{ticker},
-    //   count : 1,
-    // }) : 
-    // //update existing document in collection
-
-
-    // })
-
-
-
-
-
-
+    const colRef = collection(db, 'searches')
+    const q = query(colRef, where("name", "==", ticker))
+    
+    getDocs(q).then(snapshot => {
+      if (snapshot.docs.length === 0) {
+          addDoc(colRef, {
+            name: ticker,
+            count: 1,
+          })
+      } else {
+          const docId = snapshot.docs[0].id
+          const docRef = doc(db, 'searches', docId)
+          getDoc(docRef).then(doc => {
+            const c = doc.data().count;
+            updateDoc(docRef, {
+              count: c + 1
+            })
+          })
+      }
+    })
   }
 
   return (

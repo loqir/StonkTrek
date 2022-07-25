@@ -22,16 +22,13 @@ function App() {
         <nav>
           <Link to="/">Home</Link>
           <div></div>
-          <Link to="/search">Search</Link>
-          <div></div>
-          <Link to="/about">About</Link>
+          <Link to="/about">SearchedTickers</Link>
         </nav>
 
 
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/search" element={<Search />} />
           <Route path="/about" element={<About />} />
         </Routes>
       </Router>
