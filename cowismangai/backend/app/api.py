@@ -13,9 +13,11 @@ import pandas as pd
 
 app = FastAPI()
 
+
 origins = [
     "http://localhost:3000",
-    "localhost:3000"
+    "localhost:3000",
+    "https://orbitalfrontend.herokuapp.com/"
 ]
 
 
