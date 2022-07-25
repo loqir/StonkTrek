@@ -21,7 +21,7 @@ const Create = () => {
 
     const info = { ticker };
 
-    fetch('http://localhost:8000/stocksearch', {
+    fetch('https://orbitalfastapi.herokuapp.com/stocksearch', {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(info)
@@ -30,6 +30,8 @@ const Create = () => {
       .catch(err => {
         console.log("error:", err);
       });
+
+      
 
     addDoc(listRef, { ticker }).then(response => { console.log(response) })
       .catch(error => {
