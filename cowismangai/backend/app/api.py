@@ -14,8 +14,8 @@ import pandas as pd
 app = FastAPI()
 
 origins = [
-    "https://monorepo-k3xyiedhf-pedodoge.vercel.app/",
-    "https://monorepo-mu-eight.vercel.app/"
+    "https://stonktrek.herokuapp.com/",
+    "http://localhost:3000/"
 ]
 
 
