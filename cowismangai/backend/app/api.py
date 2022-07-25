@@ -14,8 +14,8 @@ import pandas as pd
 app = FastAPI()
 
 origins = [
-    "https://stonktrek.herokuapp.com/",
-    "http://localhost:3000/"
+    "http://localhost:3000",
+    "localhost:3000"
 ]
 
 
