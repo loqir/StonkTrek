@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import Stock from './Stock';
 import Gauge from './Gauge';
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection, onSnapshot, doc, query, where, querySnapshot } from 'firebase/firestore'
 import { db } from '../lib/init-firebase'
 import GreenArrow from "./GreenArrow";
 import RedArrow from "./RedArrow";
@@ -17,8 +17,6 @@ const Create = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const listRef = collection(db, 'movies')
-
     const info = { ticker };
 
     fetch('https://orbitalfastapi.herokuapp.com/stocksearch', {
@@ -31,12 +29,24 @@ const Create = () => {
         console.log("error:", err);
       });
 
-      
 
-    addDoc(listRef, { ticker }).then(response => { console.log(response) })
-      .catch(error => {
-        console.log(error.message)
-      })
+    // const colRef = collection(db, 'movies')
+    // const q = query(colRef, where("name", "==", {ticker}))
+
+    // q.get().then(querySnapshot => {
+    //   querySnapshot.size == 0 ?
+    //   //Add new document to collection
+    // addDoc(colRef, {
+    //   name :{ticker},
+    //   count : 1,
+    // }) : 
+    // //update existing document in collection
+
+
+    // })
+
+
+
 
 
 
