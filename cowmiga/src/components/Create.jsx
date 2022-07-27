@@ -17,11 +17,11 @@ const Create = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const info = {ticker};
+    const info = { ticker };
 
     fetch('https://orbitalfastapi.herokuapp.com/stocksearch', {
       method: 'POST',
-      // mode: 'no-cors',
+
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(info)
     }).then((result) => result.json()).then(value => settup(JSON.parse(value)))
@@ -33,22 +33,22 @@ const Create = () => {
 
     const colRef = collection(db, 'searches')
     const q = query(colRef, where("name", "==", ticker))
-    
+
     getDocs(q).then(snapshot => {
       if (snapshot.docs.length === 0) {
-          addDoc(colRef, {
-            name: ticker,
-            count: 1,
-          })
+        addDoc(colRef, {
+          name: ticker,
+          count: 1,
+        })
       } else {
-          const docId = snapshot.docs[0].id
-          const docRef = doc(db, 'searches', docId)
-          getDoc(docRef).then(doc => {
-            const c = doc.data().count;
-            updateDoc(docRef, {
-              count: c + 1
-            })
+        const docId = snapshot.docs[0].id
+        const docRef = doc(db, 'searches', docId)
+        getDoc(docRef).then(doc => {
+          const c = doc.data().count;
+          updateDoc(docRef, {
+            count: c + 1
           })
+        })
       }
     })
   }
