@@ -46,6 +46,7 @@ async def change_dic(input: dict):
     dic["Ticker"] = variable
     variable = variable.upper()
     all_tweets = twit(variable)
+    variable = variable.upper()
     final_score = 0
     analyzer = SentimentIntensityAnalyzer()
     for i in all_tweets.values():
