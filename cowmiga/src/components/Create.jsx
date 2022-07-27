@@ -32,12 +32,12 @@ const Create = () => {
 
 
     const colRef = collection(db, 'searches')
-    const q = query(colRef, where("name", "==", ticker))
+    const q = query(colRef, where("name", "==", ticker.toUpperCase()))
 
     getDocs(q).then(snapshot => {
       if (snapshot.docs.length === 0) {
         addDoc(colRef, {
-          name: ticker,
+          name: ticker.toUpperCase(),
           count: 1,
         })
       } else {
